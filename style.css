@@ -12,3 +12,9 @@
 .message-art img{height:auto;min-height:0;object-fit:contain}
 .footer-company{font-size:14px;font-weight:800;letter-spacing:.02em;color:#fff}
 @media(max-width:760px){.hero-links{padding-top:16px;padding-bottom:16px}.hero-links .btn{width:100%}.message-art{min-height:0}.message-art img{min-height:0}}
+
+/* Updated official recruitment banner: preserve the full artwork on all screens. */
+.hero{background:#fff;overflow:hidden}
+.hero picture{display:block;width:100%}
+.hero>img{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
+.message{grid-template-columns:1fr;max-width:900px}
