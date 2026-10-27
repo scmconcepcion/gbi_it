@@ -476,3 +476,24 @@ h2 em { color: var(--blue); font-style: normal; }
 .highlight {
   display: none !important;
 }
+
+
+/* Fix: keep 求める人材 cards visible even if the optional card observer is unavailable */
+.people-exact-card {
+  opacity: 1 !important;
+  transform: none;
+}
+.people-section.is-visible .people-exact-card {
+  animation: peopleCardIn .55s both;
+}
+.people-section.is-visible .people-exact-card:nth-child(1) { animation-delay: .04s; }
+.people-section.is-visible .people-exact-card:nth-child(2) { animation-delay: .13s; }
+.people-section.is-visible .people-exact-card:nth-child(3) { animation-delay: .22s; }
+.people-section.is-visible .people-exact-card:nth-child(4) { animation-delay: .31s; }
+@keyframes peopleCardIn {
+  from { opacity: .65; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .people-section.is-visible .people-exact-card { animation: none; }
+}
