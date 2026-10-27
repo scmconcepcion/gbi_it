@@ -139,7 +139,14 @@ h2 em { color: var(--blue); font-style: normal; }
 .small-note { margin: 13px 0 0; color: var(--muted); font-size: 11px; }
 
 .company-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 65px; align-items: start; }
-.company-heading h2 { margin-top: 21px; font-size: clamp(31px,3.7vw,45px); overflow-wrap: anywhere; }
+.company-heading h2 {
+  margin-top: 21px;
+  font-size: clamp(30px, 3vw, 45px);
+  line-height: 1.35;
+  letter-spacing: -.04em;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
 .company-info { padding-left: 28px; border-left: 2px solid var(--cyan); }
 .company-info dl { margin: 0; }
 .company-info dl > div { display: grid; grid-template-columns: 115px 1fr; gap: 20px; padding: 13px 0; border-bottom: 1px solid var(--line); }
@@ -496,4 +503,155 @@ h2 em { color: var(--blue); font-style: normal; }
 }
 @media (prefers-reduced-motion: reduce) {
   .people-section.is-visible .people-exact-card { animation: none; }
+}
+
+
+/* 求める人材: compact 2 × 2 card layout */
+.people-exact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+.people-exact-card {
+  min-width: 0;
+  padding: 20px 21px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.people-exact-card h4 {
+  font-size: clamp(16px, 1.45vw, 20px);
+  line-height: 1.4;
+  margin: 7px 0 8px;
+}
+.people-exact-card p {
+  font-size: 13px;
+  line-height: 1.75;
+}
+@media (max-width: 640px) {
+  .people-exact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+  .people-exact-card {
+    padding: 14px 12px 17px;
+  }
+  .people-exact-card h4 {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .people-exact-card p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+}
+@media (max-width: 360px) {
+  .people-exact-grid { grid-template-columns: 1fr; }
+  .people-exact-card h4 { font-size: 17px; }
+  .people-exact-card p { font-size: 12px; }
+}
+
+
+/* 募集要項: add subtle hover/focus feedback while keeping one single block */
+.recruitment-detail-row {
+  position: relative;
+  isolation: isolate;
+  transition: background-color .24s ease, box-shadow .24s ease, transform .24s ease;
+}
+.recruitment-detail-row::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, #1677ed, #08b4d7);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform .26s ease;
+}
+.recruitment-detail-row:hover,
+.recruitment-detail-row:focus-within {
+  background: linear-gradient(100deg, rgba(22,119,237,.055), rgba(8,180,215,.025));
+  box-shadow: inset 0 0 0 1px rgba(22,119,237,.08);
+}
+.recruitment-detail-row:hover::before,
+.recruitment-detail-row:focus-within::before {
+  transform: scaleY(1);
+}
+.recruitment-detail-row h3 {
+  transition: color .24s ease, transform .24s ease;
+}
+.recruitment-detail-row:hover h3,
+.recruitment-detail-row:focus-within h3 {
+  color: #1677ed;
+  transform: translateX(3px);
+}
+.recruitment-detail-row .details-content p {
+  transition: color .2s ease;
+}
+.recruitment-detail-row:hover .details-content p,
+.recruitment-detail-row:focus-within .details-content p {
+  color: #334a68;
+}
+@media (hover: none) {
+  /* On touch screens, retain a clean static layout instead of simulating hover. */
+  .recruitment-detail-row:hover,
+  .recruitment-detail-row:focus-within {
+    background: #fff;
+    box-shadow: none;
+  }
+  .recruitment-detail-row:hover::before,
+  .recruitment-detail-row:focus-within::before {
+    transform: scaleY(0);
+  }
+  .recruitment-detail-row:hover h3,
+  .recruitment-detail-row:focus-within h3 {
+    color: var(--navy, #071b4c);
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .recruitment-detail-row,
+  .recruitment-detail-row::before,
+  .recruitment-detail-row h3,
+  .recruitment-detail-row .details-content p {
+    transition: none !important;
+  }
+}
+
+
+/* 募集要項: minimal pointer hover on the existing divider-separated rows */
+.recruitment-detail-row {
+  position: relative;
+  isolation: isolate;
+  transition: background-color .18s ease;
+}
+.recruitment-detail-row::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: rgba(22, 119, 237, .045);
+  opacity: 0;
+  transition: opacity .18s ease;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .recruitment-detail-row:hover::before {
+    opacity: 1;
+  }
+}
+.recruitment-detail-row:hover h3 {
+  color: var(--navy, #071b4c);
+  transform: none;
+}
+.recruitment-detail-row h3 {
+  transition: none;
+}
+.recruitment-detail-row:hover .details-content p {
+  color: inherit;
+}
+.recruitment-detail-row::before {
+  border-radius: 0;
 }
