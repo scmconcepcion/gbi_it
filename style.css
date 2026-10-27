@@ -413,3 +413,66 @@ h2 em { color: var(--blue); font-style: normal; }
   .people-exact-card { opacity: 1; transform: none; transition: none; }
   .people-diagram .diagram-bubble { animation: none !important; }
 }
+
+
+/* Office footprint update: Okinawa is the only current office */
+.requirement-highlights {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 640px) {
+  .requirement-highlights { grid-template-columns: 1fr; }
+}
+.people-section { display: block; }
+.people-exact-grid { position: relative; z-index: 1; }
+
+
+/* Recruitment details: single always-visible block, no accordion controls */
+.recruitment-details-block {
+  margin-top: 26px;
+  overflow: hidden;
+  border: 1px solid #dce6f3;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 14px 40px rgba(7, 27, 76, .05);
+}
+.recruitment-detail-row {
+  display: grid;
+  grid-template-columns: minmax(190px, .34fr) minmax(0, 1fr);
+  gap: 26px;
+  padding: 27px 30px;
+  border-bottom: 1px solid #e6edf6;
+}
+.recruitment-detail-row:last-child { border-bottom: 0; }
+.recruitment-detail-row h3 {
+  margin: 0;
+  color: var(--navy, #071b4c);
+  font-size: 17px;
+  font-weight: 850;
+  line-height: 1.6;
+}
+.recruitment-detail-row .details-content { min-width: 0; }
+.recruitment-detail-row .details-content p {
+  margin: 0 0 12px;
+  color: #536681;
+  font-size: 14px;
+  line-height: 1.9;
+}
+.recruitment-detail-row .details-content p:last-child { margin-bottom: 0; }
+.recruitment-detail-row .details-content strong { color: #12264a; }
+@media (max-width: 680px) {
+  .recruitment-details-block { border-radius: 15px; }
+  .recruitment-detail-row {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    padding: 20px 18px;
+  }
+  .recruitment-detail-row h3 { font-size: 16px; }
+  .recruitment-detail-row .details-content p { font-size: 13px; }
+}
+
+
+/* Recruitment highlights removed at management review */
+.requirement-highlights,
+.highlight {
+  display: none !important;
+}
